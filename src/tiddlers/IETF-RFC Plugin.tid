@@ -1,14 +1,16 @@
 created: 20141001162614812
 creator: TheDiveO
-modified: 20170225175926196
+modified: 20170225195318041
 modifier: TheDiveO
 title: IETF-RFC Plugin
 type: text/vnd.tiddlywiki
 
+<<fa-lbox glyph:"fa-info-circle">>
 !About
 
 This is the ''IETF-RFC'' plugin version "<$view tiddler="$:/plugins/TheDiveO/IETF-RFC" field="version" />" (<$list filter="[[$:/plugins/TheDiveO/IETF-RFC/readme]is[shadow]]" emptyMessage="<span style='color: #c00; font-weight: bold'>development</span>">release</$list> wiki).
 
+<<fa-lbox glyph:"fa-plug">>
 !Usage
 
 # Download the IETF RFC index here: https://www.rfc-editor.org/rfc-index.xml and save it with the file extension `.rfcindex`.
@@ -16,6 +18,7 @@ This is the ''IETF-RFC'' plugin version "<$view tiddler="$:/plugins/TheDiveO/IET
 # Wait some seconds while your browser chokes on the (currently around 11MB) XML.
 # Import all RFC index tiddlers.
 
+<<fa-lbox glyph:"fa-book">>
 !Plugin Demo and Docu Wiki
 
 * Eating my own dog food...
