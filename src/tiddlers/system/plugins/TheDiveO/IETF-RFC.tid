@@ -1,0 +1,12 @@
+author: TheDiveO
+created: 20140902114846490
+description: Working with IETF RFCs easily in TiddlyWiki 5
+list: readme license history
+modified: 20170225163224480
+plugin-type: plugin
+source: http://thediveo.github.io/IETF-RFC
+title: $:/plugins/TheDiveO/IETF-RFC
+type: application/json
+version: 0.0.1-dev
+
+{"tiddlers": {}}
