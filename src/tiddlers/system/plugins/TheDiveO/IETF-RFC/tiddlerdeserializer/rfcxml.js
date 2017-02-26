@@ -4,7 +4,7 @@ type: application/javascript
 title: $:/plugins/TheDiveO/IETF-RFC/tiddlerdeserializer/rfcxml.js
 tags:
 modifier: TheDiveO
-modified: 20170225205748234
+modified: 20170226162634599
 creator: TheDiveO
 module-type: tiddlerdeserializer
 \*/
@@ -18,6 +18,10 @@ module-type: tiddlerdeserializer
 // running on Node.js, use the xmldom DOM parser that is provided by the standard
 // TiddlyWiki 5 plugin "xmldom".
 var DOMParser = $tw.browser ? window.DOMParser : require("$:/plugins/tiddlywiki/xmldom/dom-parser").DOMParser;
+
+// Use HTML ndash entity whenever we encounter a pseudo ASCII ndash in
+// RFC data fields.
+var ndash = "&#8211;";
 
 // The (core) path where to put all the RFC index data tiddlers. Do not add a
 // trailing slash "/" to this location (title).
@@ -63,7 +67,7 @@ function getAbstract(entry) {
     $tw.utils.each(entry.getElementsByTagName("p"), function(p) {
       var s = p.childNodes[0].nodeValue;
       // replace pseudo ASCII en-dashes with proper TW5 wiki markup
-      s = s.replace(/ - /gi, " -- ");
+      s = s.replace(/ - /gi, " " + ndash + " ");
       // ToDo: RFC references
 
       // add this paragraph
@@ -106,7 +110,7 @@ exports["application/x-rfc-index"] = function(text, fields) {
     // by guessing the intended TW5 markup.
     var rfctitle = getElementValue(rfcentry, "title", "");
     // replace ASCII pseudo en-dashes with proper TW5 wiki markup
-    rfctitle = rfctitle.replace(/ - /gi, " -- ");
+    rfctitle = rfctitle.replace(/ - /gi, " " + ndash + " ");
 
     var updates = getRfcList(rfcentry, "updates");
     var updatedby = getRfcList(rfcentry, "updated-by");

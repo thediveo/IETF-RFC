@@ -1,0 +1,35 @@
+created: 20170226160756179
+modified: 20170226164936827
+tags: 
+title: Plugin Internals
+type: text/vnd.tiddlywiki
+
+\define fn(cell) <div style="width: 9em; white-space: nowrap;">`$cell$`</div>
+
+!! IETF RFC Plugin Data Namespace
+
+The IETF RFC plugin uses the tiddler title (system) namespace `$:/rfcindex` for storing data related to RFC documents, et cetera. Tiddlers inside this namespace are considered to be under the sole control of the IETF RFC plugin. In particular, the plugin rewrites these tiddlers when importing and updating the RFC index.
+
+!! RFC Data Tiddlers
+
+RFC data is stored in tiddlers, one tiddler per individual RFC document. The RFC date tiddler title namespace is <code>~$:/rfcindex/rfc/<i>nnnn</i></code> -- where //nnnn// is the number of the RFC document in question.
+
+In addition, RFC data tiddlers are always tagged as `[[RFC Data]]`.
+
+The RFC data tiddlers possess the following fields:
+
+|!Field Name |!Purpose |
+|^<<fn "rfc-title">> |Title of RFC document, with some minor cleanup applied. In particular, pseudo ASCII en-dashes are replaced with HTML en-dashes. |
+|^<<fn "rfc-num">> |The RFC document number, in form of //nnnn//. |
+|^<<fn "text">> |The abstract of the RFC document, if available. Otherwise, `text` is left empty. |
+|<<fn "tags">> |Always the single tag named `[[RFC Data]]`. |
+|<<fn "rfc-errata-url">> |The link to errata information, if available. Otherwise empty. |
+|<<fn "rfc-updates">> |A list of RFC document //numbers// (in the form //nnnn//): ''this RFC is updating those other RFCs listed''. |
+|<<fn "rfc-updated-by">> |A list of RFC document //numbers// (in the form //nnnn//): ''those other RFCs listed update this RFC''. |
+|<<fn "rfc-obsoletes">> |A list of RFC document //numbers// (in the form //nnnn//): ''this RFC is obsoleting those other RFCs listed''. |
+|<<fn "rfc-obsoleted-by">> |A list of RFC document //numbers// (in the form //nnnn//): ''those other RFCs listed obsolete this RFC''. |
+|<<fn "rfc-">> |. |
+
+!! Modules
+* [[$:/plugins/TheDiveO/IETF-RFC/tiddlerdeserializer/rfcxml.js]] is a TW5 deserializer necessary for importing the IETF RFC XML index:
+** it imports XML files with a `.rfcindex` file exention, which are considered to be of MIME type `application/x-rfc-index`.

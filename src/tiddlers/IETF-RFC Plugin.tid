@@ -1,6 +1,6 @@
 created: 20141001162614812
 creator: TheDiveO
-modified: 20170225195318041
+modified: 20170226165034037
 modifier: TheDiveO
 title: IETF-RFC Plugin
 type: text/vnd.tiddlywiki
@@ -21,6 +21,7 @@ This is the ''IETF-RFC'' plugin version "<$view tiddler="$:/plugins/TheDiveO/IET
 <<fa-lbox glyph:"fa-book">>
 !Plugin Demo and Docu Wiki
 
+* [[Plugin Internals]]
 * Eating my own dog food...
 * Requires the xmldom TiddlyWiki plugin: you can directly install it into your own TiddlyWiki:
 ** go to the [[Plugins Control Panel|$:/core/ui/ControlPanel/Plugins]].
