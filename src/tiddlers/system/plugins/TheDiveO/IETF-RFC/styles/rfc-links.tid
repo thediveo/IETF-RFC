@@ -1,5 +1,5 @@
 created: 20170226180754050
-modified: 20170226181452448
+modified: 20170226182432969
 tags: $:/tags/Stylesheet
 title: $:/plugins/TheDiveO/IETF-RFC/styles/rfc-links
 type: text/css
@@ -7,6 +7,7 @@ type: text/css
 .rfc-link-rfc:before {
 	font-family: "FontAwesome";
     font-size: 90%;
+    font-style: normal;
     content: "\f02d\202f";
 }
 .ietf-rfc-link-rfc-title {
