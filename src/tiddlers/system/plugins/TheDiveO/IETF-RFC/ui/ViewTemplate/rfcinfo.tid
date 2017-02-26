@@ -1,0 +1,14 @@
+created: 20170226165952150
+modified: 20170226171833620
+tags: $:/tags/ViewTemplate
+title: $:/plugins/TheDiveO/IETF-RFC/ui/ViewTemplate/rfcinfo
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]tag[RFC]]">
+<$list filter="[all[current]removeprefix[RFC ]addprefix[$:/rfcindex/rfc/]]">
+<h3>RFC abstract</h3>
+<div class="ietf-rfc-view-abstract">
+<$transclude mode="block">(//no abstract//)</$transclude>
+</div>
+</$list>
+</$list>

@@ -1,0 +1,8 @@
+created: 20170226173810866
+modified: 20170226174028124
+tags: $:/tags/Macro
+title: $:/plugins/TheDiveO/IETF-RFC/macros/quot
+type: text/vnd.tiddlywiki
+
+\define ietf-rfc-lquo() &#171;
+\define ietf-rfc-rquo() &#187;

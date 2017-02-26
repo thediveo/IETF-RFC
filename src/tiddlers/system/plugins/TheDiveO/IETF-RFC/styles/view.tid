@@ -1,0 +1,9 @@
+created: 20170226171839843
+modified: 20170226172049246
+tags: $:/tags/Stylesheet
+title: $:/plugins/TheDiveO/IETF-RFC/styles/view
+type: text/css
+
+.ietf-rfc-view-abstract {
+	font-style: italic;
+}
