@@ -1,10 +1,10 @@
 created: 20170226160756179
-modified: 20170226164936827
+modified: 20170226201051109
 tags: 
 title: Plugin Internals
 type: text/vnd.tiddlywiki
 
-\define fn(cell) <div style="width: 9em; white-space: nowrap;">`$cell$`</div>
+\define fn(cell) <div style="width: 13em; white-space: nowrap;">`$cell$`</div>
 
 !! IETF RFC Plugin Data Namespace
 
@@ -28,8 +28,22 @@ The RFC data tiddlers possess the following fields:
 |<<fn "rfc-updated-by">> |A list of RFC document //numbers// (in the form //nnnn//): ''those other RFCs listed update this RFC''. |
 |<<fn "rfc-obsoletes">> |A list of RFC document //numbers// (in the form //nnnn//): ''this RFC is obsoleting those other RFCs listed''. |
 |<<fn "rfc-obsoleted-by">> |A list of RFC document //numbers// (in the form //nnnn//): ''those other RFCs listed obsolete this RFC''. |
+|<<fn "rfc-deep-updated-by">> |Automatically calculated during import: the list of most recent documents updating this RFC. When there are updates to updates, then these will show up also in this list, but not in `rfc-updated-by`. |
+|<<fn "rfc-deep-obsoleted-by">> |Automatically calculated during import: the list of most recent documents that obsolete this RFC. |
 |<<fn "rfc-">> |. |
 
 !! Modules
-* [[$:/plugins/TheDiveO/IETF-RFC/tiddlerdeserializer/rfcxml.js]] is a TW5 deserializer necessary for importing the IETF RFC XML index:
+* [[$:/plugins/TheDiveO/IETF-RFC/tiddlerdeserializer/rfcxml.js]] -- the  TW5 ''deserializer'' used for importing the IETF RFC XML index:
 ** it imports XML files with a `.rfcindex` file exention, which are considered to be of MIME type `application/x-rfc-index`.
+* [[$:/plugins/TheDiveO/IETF-RFC/ui/ViewTemplate/rfcinfo]] -- the TW5 ''view template'' showing RFC document information for tiddlers marked as `RFC`.
+* Macros
+** [[$:/plugins/TheDiveO/IETF-RFC/macros/rfc]]
+*** `rfc` macro for referencing to an RFC document by number.
+** [[$:/plugins/TheDiveO/IETF-RFC/macros/quot]] -- defines which quote glyphs to use when citating RFC document titles.
+* Parser (Wikiparser Rules)
+** [[$:/plugins/TheDiveO/IETF-RFC/parsers/wikiparser/rules/rfclink]] -- wikiparser rule for inline RFC links.
+* Styling
+** [[$:/plugins/TheDiveO/IETF-RFC/styles/view]] -- CSS styling re: the tiddler view template.
+** [[$:/plugins/TheDiveO/IETF-RFC/styles/rfc-links]] -- CSS styling re: RFC document intra-TW5 links.
+* UI Templates
+** [[$:/plugins/TheDiveO/IETF-RFC/ui/ViewTemplate/rfcinfo]] -- shows RFC document information whenever the title of a tiddler starts with `RFC `.

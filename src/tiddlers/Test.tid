@@ -1,8 +1,18 @@
 created: 20170226173415181
-modified: 20170226180347094
+creator: TheDiveo
+modified: 20170226202058618
+modifier: TheDiveo
 tags: 
 title: Test
 type: text/vnd.tiddlywiki
 
-* long RFC reference: <<rfc 3318>>
-* short RFC reference: <<rfcs 3318>>
+!! Macro Calls
+* long RFC reference: <<rfc 3318>>.
+* short RFC reference: <<rfcs 3318>>.
+* missing RFC reference: <<rfc 7724>>.
+* invalid RFC reference: <<rfc 99999>>.
+
+!! Parser Rules
+* see also RFC 3318.
+* or shorter: see RFC*3318.
+* but don't see RFC&nbsp;3318, or rfc 3318.
