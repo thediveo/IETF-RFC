@@ -4,7 +4,7 @@ type: application/javascript
 title: $:/plugins/TheDiveO/IETF-RFC/parsers/wikiparser/rules/rfclink.js
 tags:
 modifier: TheDiveo
-modified: 20170226201831575
+modified: 20170226222026731
 creator: TheDiveo
 module-type: wikirule
 \*/
@@ -13,6 +13,16 @@ module-type: wikirule
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
+
+/*
+Wikiparser rule for replacing textual occurences of RFC plus
+a four-digit number with macro calls to generate proper (annotated)
+RFC document intra-wiki links. Below, nnnn represents a four-digit
+number; for "future proofness" also five-digit numbers are accepted,
+too:
+  "RFC nnnn" --> <<rfc nnnn>>
+  "RFC*nnnn" --> <<rfcs nnnn>>
+*/
 
 // Describe our wikiparser rule for handling inline RFC links.
 exports.name = "rfclink";
