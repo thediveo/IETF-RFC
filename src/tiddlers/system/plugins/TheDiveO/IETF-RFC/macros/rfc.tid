@@ -1,5 +1,5 @@
 created: 20170226173119409
-modified: 20170226202122894
+modified: 20170303173445360
 tags: $:/tags/Macro
 title: $:/plugins/TheDiveO/IETF-RFC/macros/rfc
 type: text/vnd.tiddlywiki
@@ -7,9 +7,33 @@ type: text/vnd.tiddlywiki
 \define rfc-tt(num) RFC&nbsp;$num$: <<rfc-title>>
 
 \define rfc(num)
-<$list filter="[[$:/rfcindex/rfc/$num$]]"><$set name="rfc-title" value={{!!rfc-title}}><$set name="tv-wikilink-tooltip" value=<<rfc-tt num:$num$>> ><$link to="RFC $num$" class="rfc-link rfc-link-rfc rfc-link-rfc-normal">RFC&nbsp;$num$ <span class="ietf-rfc-link-rfc-title">(<<ietf-rfc-lquo>><$view field="rfc-title">...</$view><<ietf-rfc-rquo>>)</span></$link></$set></$set></$list>
+<$list
+	filter="[[$:/rfcindex/rfc/$num$]]"
+><$set
+	name="rfc-title"
+    value={{!!rfc-title}}
+><$set
+	name="tv-wikilink-tooltip"
+    value=<<rfc-tt num:$num$>>
+><$link
+	to="RFC $num$"
+    class="rfc-link rfc-link-rfc rfc-link-rfc-normal"
+>RFC&nbsp;$num$ <span
+	class="ietf-rfc-link-rfc-title"
+><<ietf-rfc-lquo>><$transclude field="rfc-title"/><<ietf-rfc-rquo>></span></$link></$set></$set></$list>
 \end
 
 \define rfcs(num)
-<$list filter="[[$:/rfcindex/rfc/$num$]]"><$set name="rfc-title" value={{!!rfc-title}}><$set name="tv-wikilink-tooltip" value=<<rfc-tt num:$num$>> ><$link to="RFC $num$" class="rfc-link rfc-link-rfc rfc-link-rfc-short">RFC&nbsp;$num$</$link></$set></$set></$list>
+<$list
+	filter="[[$:/rfcindex/rfc/$num$]]"
+><$set
+	name="rfc-title"
+    value={{!!rfc-title}}
+><$set
+	name="tv-wikilink-tooltip"
+    value=<<rfc-tt num:$num$>>
+><$link
+	to="RFC $num$"
+    class="rfc-link rfc-link-rfc rfc-link-rfc-short"
+>RFC&nbsp;$num$</$link></$set></$set></$list>
 \end

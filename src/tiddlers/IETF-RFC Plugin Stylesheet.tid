@@ -1,0 +1,20 @@
+created: 20170303174920251
+modified: 20170303180615381
+tags: $:/tags/Stylesheet
+title: IETF-RFC Plugin Stylesheet
+type: text/css
+
+.example-result {
+	display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border: 1px solid #cccccc;
+    padding: 0.5em 3px 2px 0.5em;
+    border-radius: 3px;
+}
+
+.example .example-result,
+.example pre {
+	margin-left: 2em;
+    margin-right: 2em;
+}

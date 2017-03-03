@@ -1,26 +1,30 @@
 created: 20141001162614812
 creator: TheDiveO
-modified: 20170227164729669
+modified: 20170303174014629
 modifier: TheDiveO
 title: IETF-RFC Plugin
 type: text/vnd.tiddlywiki
 
 <<fa-lbadge glyph:"fa-info">>
-!About
+! About
 
 This is the ''IETF-RFC'' plugin version "<$view tiddler="$:/plugins/TheDiveO/IETF-RFC" field="version" />" (<$list filter="[[$:/plugins/TheDiveO/IETF-RFC/readme]is[shadow]]" emptyMessage="<span style='color: #c00; font-weight: bold'>development</span>">release</$list> wiki).
 
 <<fa-lbadge glyph:"fa-plug">>
-!Usage
+! Plugin Installation
 
 # Download the IETF RFC index here: https://www.rfc-editor.org/rfc-index.xml and save it with the file extension `.rfcindex`.
 # Drag and drop the downloaded index file into this TiddlyWiki.
+
+<<fa-lbadge glyph:"fa-list">>
+! RFC Index Installation
 # Wait some seconds while your browser chokes on the (currently around 11MB) XML.
 # Import all RFC index tiddlers.
 
 <<fa-lbadge glyph:"fa-book">>
-!Plugin Demo and Docu Wiki
+! Plugin Demo and Docu Wiki
 
+* [[Usage]]
 * [[Plugin Internals]]
 * Eating my own dog food...
 * Requires the xmldom TiddlyWiki plugin: you can directly install it into your own TiddlyWiki:
