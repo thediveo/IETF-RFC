@@ -4,7 +4,7 @@ type: application/javascript
 title: $:/plugins/TheDiveO/IETF-RFC/tiddlerdeserializer/rfcxml.js
 tags:
 modifier: TheDiveO
-modified: 20170226162634599
+modified: 20170304101002584
 creator: TheDiveO
 module-type: tiddlerdeserializer
 \*/
@@ -118,6 +118,8 @@ exports["application/x-rfc-index"] = function(text, fields) {
     var obsoletedby = getRfcList(rfcentry, "obsoleted-by");
 
     var errurl = getElementValue(rfcentry, "errata-url", "");
+    var currstat = getElementValue(rfcentry, "current-status", "???");
+    var pubstat = getElementValue(rfcentry, "publication-status", "???");
 
     // Get and process the abstract into TW5 markup.
     var abstract = getAbstract(rfcentry);
@@ -130,6 +132,10 @@ exports["application/x-rfc-index"] = function(text, fields) {
       "rfc-title": rfctitle,
       "rfc-num": rfcnum,
       "rfc-errata-url": errurl,
+
+      "rfc-current-status": currstat,
+      "rfc-publication-status": pubstat,
+
       "rfc-updates": updates,
       "rfc-updated-by": updatedby,
       "rfc-obsoletes": obsoletes,

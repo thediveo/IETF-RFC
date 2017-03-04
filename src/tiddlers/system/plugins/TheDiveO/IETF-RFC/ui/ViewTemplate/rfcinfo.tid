@@ -1,6 +1,6 @@
 created: 20170226165952150
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20170304095012382
+modified: 20170304101452517
 tags: $:/tags/ViewTemplate
 title: $:/plugins/TheDiveO/IETF-RFC/ui/ViewTemplate/rfcinfo
 type: text/vnd.tiddlywiki
@@ -23,6 +23,8 @@ type: text/vnd.tiddlywiki
 	class="ietf-rfc-view-data-table"
 >
 <$macrocall $name="rfc-view-table-row-rfcdoc-link" num={{!!rfc-num}} />
+<tr><th>Current status</th><td><$view field="rfc-current-status"/></td></tr>
+<tr><th>Publication status</th><td><$view field="rfc-publication-status"/></td></tr>
 <<rfc-view-table-row "Obsoletes&nbsp;<i class='fa fa-long-arrow-right'/>" "rfc-obsoletes">>
 <<rfc-view-table-row "Updates&nbsp;<i class='fa fa-long-arrow-right'/>" "rfc-updates">>
 <<rfc-view-table-row "Obsoleted by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-obsoleted-by">>
