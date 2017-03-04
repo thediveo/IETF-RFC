@@ -1,0 +1,13 @@
+created: 20170304080433748
+modified: 20170304083415304
+tags: $:/tags/Macro
+title: $:/plugins/TheDiveO/IETF-RFC/macros/rfc-list
+type: text/vnd.tiddlywiki
+
+\define ietf-rfc-list(field, class:"ietf-rfc-view-data-table-rfclist")
+<ul
+	class="$class$"
+><$list
+	filter="[list[!!$field$]]"
+><li><$macrocall $name="rfc" num={{!!title}} /></li></$list></ul>
+\end

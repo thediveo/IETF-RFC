@@ -1,0 +1,18 @@
+created: 20170304082452865
+modified: 20170304084242885
+tags: $:/tags/Stylesheet
+title: $:/plugins/TheDiveO/IETF-RFC/styles-rfc-header
+type: text/css
+
+table.ietf-rfc-view-data-table th {
+	text-align: left;
+}
+
+ul.ietf-rfc-view-data-table-rfclist {
+	margin-top: 0.1ex;
+    margin-bottom: 0.1ex;
+	padding-left: 1em;
+}
+
+.ietf-rfc-view-abstract {
+}

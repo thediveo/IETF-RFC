@@ -1,0 +1,18 @@
+created: 20170303174101183
+modified: 20170303181506703
+title: Usage
+type: text/vnd.tiddlywiki
+
+!! Parser Support
+
+Simple textual RFC document number references are automatically rendered as intra-Wiki links, and include the title of the RFC document. This is the long format.
+
+<<resultbox "See RFC 3318.">>
+
+Alternatively, there is a shorthand notation for intra-Wiki RFC links that omits the RFC document title. The title can still be found out by hovering the mouse over the RFC link. 
+
+<<resultbox "See RFC*3318.">>
+
+Please note that the parser support -- on purpose -- only triggers on RFC references that use the correct uppercase spelling of RFC. In addition, there must be exactly either a space "` `" or star "`*`" between `RFC` and the document number. Therefore the following non-standard spellings won't turn into RFC document links.
+
+<<resultbox "See rfc 3318. Or, see RFC-3318 instead. But not xxRFC 3318.">>

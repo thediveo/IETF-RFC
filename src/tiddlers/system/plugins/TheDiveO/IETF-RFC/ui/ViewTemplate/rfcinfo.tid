@@ -1,17 +1,40 @@
 created: 20170226165952150
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20170301201801568
+modified: 20170304090749863
 tags: $:/tags/ViewTemplate
 title: $:/plugins/TheDiveO/IETF-RFC/ui/ViewTemplate/rfcinfo
 type: text/vnd.tiddlywiki
 
-<$list filter="[all[current]prefix[RFC ]]">
-<$list filter="[all[current]removeprefix[RFC ]addprefix[$:/rfcindex/rfc/]]">
-<div class="tc-tiddler-info">
+\define rfc-view-table-row(header, field)
+<tr><th>$header$</th><td><<ietf-rfc-list "$field$">></td></tr>
+\end
+
+\define ietf-rfc-doc-url()
+<$macrocall $name="ietf-rfc-doc-num" num={{!!rfc-num}}/>
+\end
+
+\define ietf-rfc-doc-num(num)
+https://tools.ietf.org/html/$num$
+\end
+
+<$list
+	filter="[all[current]prefix[RFC ]]"
+><$list
+	filter="[all[current]removeprefix[RFC ]addprefix[$:/rfcindex/rfc/]]"
+><div
+	class="tc-tiddler-info"
+><table
+	class="ietf-rfc-view-data-table"
+>
+<tr><th>IETF RFC document</th><td><a href=<<ietf-rfc-doc-url>> ><$transclude field="rfc-title"/></a></td></tr>
+<<rfc-view-table-row "Obsoletes&nbsp;<i class='fa fa-long-arrow-right'/>" "rfc-obsoletes">>
+<<rfc-view-table-row "Updates&nbsp;<i class='fa fa-long-arrow-right'/>" "rfc-updates">>
+<<rfc-view-table-row "Obsoleted by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-obsoleted-by">>
+<<rfc-view-table-row "Updated by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-updated-by">>
+</table>
 <h3>Abstract</h3>
-<div class="ietf-rfc-view-abstract">
-<$transclude mode="block">(//no abstract//)</$transclude>
-</div>
-</div>
-</$list>
-</$list>
+<div
+	class="ietf-rfc-view-abstract"
+><$transclude
+	mode="block">(//no abstract//</$transclude
+></div></div></$list></$list>
