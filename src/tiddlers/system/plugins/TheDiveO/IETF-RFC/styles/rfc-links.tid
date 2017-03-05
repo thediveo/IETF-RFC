@@ -1,15 +1,26 @@
 created: 20170226180754050
-modified: 20170226182432969
+modified: 20170305212808041
 tags: $:/tags/Stylesheet
 title: $:/plugins/TheDiveO/IETF-RFC/styles/rfc-links
 type: text/css
 
-.rfc-link-rfc:before {
+/* Place a "comment" icon just before a reference to an RFC article. You need
+ * to have the plugin TW5FontAwesome installed for this to correctly show. Why
+ * a "comment" icon? Because these are (R)equests (F)or (C)omments.
+ */
+.ietf-rfc-link-rfc:before {
 	font-family: "FontAwesome";
-    font-size: 90%;
+    vertical-align: super;
+    font-size: 70%;
     font-style: normal;
-    content: "\f02d\202f";
+    content: "\f0e5\202f";
 }
+
+/* The (inline) title of an RFC document in an RFC reference can be
+ * formatted individually.
+ */
 .ietf-rfc-link-rfc-title {
 	font-style: italic;
+    vertical-align: super;
+    font-size: 75%;
 }
