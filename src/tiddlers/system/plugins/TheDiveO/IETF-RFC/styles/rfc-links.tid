@@ -1,5 +1,5 @@
 created: 20170226180754050
-modified: 20170305212808041
+modified: 20170305214440463
 tags: $:/tags/Stylesheet
 title: $:/plugins/TheDiveO/IETF-RFC/styles/rfc-links
 type: text/css
@@ -17,10 +17,15 @@ type: text/css
 }
 
 /* The (inline) title of an RFC document in an RFC reference can be
- * formatted individually.
+ * formatted individually. The default is to format the title in a superscript.
  */
 .ietf-rfc-link-rfc-title {
 	font-style: italic;
     vertical-align: super;
     font-size: 75%;
+}
+
+.ietf-rfc-view-data-table-rfclist .ietf-rfc-link-rfc-title {
+	vertical-align: inherit;
+    font-size: inherit;
 }

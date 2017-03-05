@@ -1,0 +1,23 @@
+created: 20170226171839843
+modified: 20170305215120595
+tags: $:/tags/Stylesheet
+title: $:/plugins/TheDiveO/IETF-RFC/styles/rfc-view
+type: text/css
+
+.ietf-rfc-view-abstract {
+	font-style: italic;
+}
+
+/* The RFC view template shows an RFC data table; make sure that the
+ * cell contents are allows vertically aligned to the top.
+ */
+.ietf-rfc-view-data-table th,
+.ietf-rfc-view-data-table td {
+	vertical-align: top;
+}
+
+/*
+ */
+h3.ietf-rfc-view-abstract-header {
+	font-weight: bold;
+}

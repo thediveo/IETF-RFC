@@ -1,6 +1,6 @@
 created: 20170226165952150
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20170305211118338
+modified: 20170305220007678
 tags: $:/tags/ViewTemplate
 title: $:/plugins/TheDiveO/IETF-RFC/ui/ViewTemplate/rfcinfo
 type: text/vnd.tiddlywiki
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 \define rfc-view-status-filter(currstat)
 <$list
 	filter="[all[current]!field:rfc-publication-status[$currstat$]]"
->(published as: <$view field="rfc-current-status"/>)</$list>
+>(originally published as: <$view field="rfc-publication-status"/>)</$list>
 \end
 
 <$list
@@ -28,19 +28,20 @@ type: text/vnd.tiddlywiki
 ><table
 	class="ietf-rfc-view-data-table"
 >
-<$macrocall $name="rfc-view-table-row-rfcdoc-link" num={{!!rfc-num}} />
 <tr><th>Current status</th><td>
 <$view field="rfc-current-status"/>
 <$macrocall $name="rfc-view-status-filter" currstat={{!!rfc-current-status}} />
 </td></tr>
+<$macrocall $name="rfc-view-table-row-rfcdoc-link" num={{!!rfc-num}} />
 <<rfc-view-table-row "Obsoletes&nbsp;<i class='fa fa-long-arrow-right'/>" "rfc-obsoletes">>
 <<rfc-view-table-row "Updates&nbsp;<i class='fa fa-long-arrow-right'/>" "rfc-updates">>
 <<rfc-view-table-row "Obsoleted by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-obsoleted-by">>
 <<rfc-view-table-row "Updated by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-updated-by">>
 </table>
-<h3>Abstract</h3>
+<h3 class="ietf-rfc-view-abstract-header">Abstract</h3>
 <div
 	class="ietf-rfc-view-abstract"
 ><$transclude
+	field="rfc-abstract"
 	mode="block"
 >(//no abstract available//)</$transclude></div></div></$list></$list>

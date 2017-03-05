@@ -1,0 +1,41 @@
+created: 20170226173119409
+modified: 20170305213522975
+tags: $:/tags/Macro
+title: $:/plugins/TheDiveO/IETF-RFC/macros/rfc-ref
+type: text/vnd.tiddlywiki
+
+\define rfc-tt(num) RFC&nbsp;$num$: <<rfc-title>>
+
+\define rfc(num)
+<$list
+	filter="[[$:/rfcindex/rfc/$num$]]"
+><$set
+	name="rfc-title"
+    value={{!!rfc-title}}
+    emptyValue="..."
+><$set
+	name="tv-wikilink-tooltip"
+    value=<<rfc-tt num:$num$>>
+><$link
+	to="RFC $num$"
+    class="ietf-rfc-link ietf-rfc-link-rfc ietf-rfc-link-rfc-normal"
+>RFC&nbsp;$num$ <span
+	class="ietf-rfc-link-rfc-title"
+><<ietf-rfc-lquo>><$transclude field="rfc-title">...</$transclude><<ietf-rfc-rquo>></span></$link></$set></$set></$list>
+\end
+
+\define rfcs(num)
+<$list
+	filter="[[$:/rfcindex/rfc/$num$]]"
+><$set
+	name="rfc-title"
+    value={{!!rfc-title}}
+    emptyValue="..."
+><$set
+	name="tv-wikilink-tooltip"
+    value=<<rfc-tt num:$num$>>
+><$link
+	to="RFC $num$"
+    class="ietf-rfc-link ietf-rfc-link-rfc ietf-rfc-link-rfc-short"
+>RFC&nbsp;$num$</$link></$set></$set></$list>
+\end
