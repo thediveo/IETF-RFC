@@ -4,7 +4,7 @@ type: application/javascript
 title: $:/plugins/TheDiveO/IETF-RFC/tiddlerdeserializer/rfcxml.js
 tags:
 modifier: TheDiveO
-modified: 20170304101002584
+modified: 20170307185632585
 creator: TheDiveO
 module-type: tiddlerdeserializer
 \*/
@@ -58,26 +58,37 @@ function getElementValue(entry, elementName, defValue) {
   }
 }
 
-// Retrieve the abstract and convert it into TW5 markup. The abstract
-// consists of a sequence of paragraph (p) elements.
+// Convenience function which tries to retrieve the value of the specified
+// element, and if it succeeds, then sets a tiddler field to this element
+// value.
+function txfElement(entry, elementName, tid, fieldName) {
+  var val = getElementValue(entry, elementName, undefined);
+  if (val !== undefined) {
+    tid[fieldName] = val;
+  }
+}
+
+// Retrieve the abstract for an RFC document, and convert it into TW5 markup.
+// The abstract consists of a sequence of paragraph (<p>) elements, but isn't(!)
+// HTML markup in any way.
 function getAbstract(entry) {
   var ab = entry.getElementsByTagName("abstract");
-  var mu = "";
+  var twmarkup = "";
   if (ab.length > 0) {
     $tw.utils.each(entry.getElementsByTagName("p"), function(p) {
       var s = p.childNodes[0].nodeValue;
       // replace pseudo ASCII en-dashes with proper TW5 wiki markup
       s = s.replace(/ - /gi, " " + ndash + " ");
-      // ToDo: RFC references
-
-      // add this paragraph
-      mu = mu + s + "\n\n";
+      // add this paragraph using proper TW5 markup; that's
+      // two line ends.
+      twmarkup = twmarkup + s + "\n\n";
     });
   }
-  return mu;
+  return twmarkup;
 }
 
-//
+// Get a list of RFC document numbers. This list will always be just the
+// numbers, without any RFC token.
 function getRfcList(entry, elementName) {
   var el = entry.getElementsByTagName(elementName);
   if (el.length > 0) {
@@ -91,7 +102,17 @@ function getRfcList(entry, elementName) {
     });
     return r.join(" ");
   }
-  return "";
+  return undefined;
+}
+
+// Convenience function that retrieves an RFC document number list, and
+// if this list is not empty, then creates a tiddler field with this list
+// as the field value.
+function txfRfcList(entry, elementName, tid, fieldName) {
+  var rfclist = getRfcList(entry, elementName);
+  if (rfclist !== undefined) {
+    tid[fieldName] = rfclist;
+  }
 }
 
 // The RFC Index importer itself, which is a TW5 tiddler deserializer that works
@@ -102,45 +123,40 @@ exports["application/x-rfc-index"] = function(text, fields) {
 
   // Iterate over all RFC entry elements in the RFC index.
   $tw.utils.each(rfcidx.getElementsByTagName("rfc-entry"), function(rfcentry) {
-    // Get the RFC document ID, and extract the RFC number from it.
+    // Get the RFC document ID, and extract the RFC number from it. This makes
+    // some TW5 macro and filter operations easier lateron.
     var docid = getElementValue(rfcentry, "doc-id", "");
     var rfcnum = parseRfcNum(docid);
 
     // Get the (potentially lengthy) RFC title. Clean up some ASCII glitches
     // by guessing the intended TW5 markup.
     var rfctitle = getElementValue(rfcentry, "title", "");
-    // replace ASCII pseudo en-dashes with proper TW5 wiki markup
+    // Replace ASCII pseudo en-dashes with proper TW5 wiki markup
     rfctitle = rfctitle.replace(/ - /gi, " " + ndash + " ");
-
-    var updates = getRfcList(rfcentry, "updates");
-    var updatedby = getRfcList(rfcentry, "updated-by");
-    var obsoletes = getRfcList(rfcentry, "obsoletes");
-    var obsoletedby = getRfcList(rfcentry, "obsoleted-by");
-
-    var errurl = getElementValue(rfcentry, "errata-url", "");
-    var currstat = getElementValue(rfcentry, "current-status", "???");
-    var pubstat = getElementValue(rfcentry, "publication-status", "???");
 
     // Get and process the abstract into TW5 markup.
     var abstract = getAbstract(rfcentry);
 
-    // Finally push a tiddler for this RFC into the result import list.
-	var tid = {
-      title: RFCDataLocation + rfcnum,
-      text: abstract,
-      tags: RFCDataTag,
+    // Start building the RFC data tiddler; we will lateron gradually add more
+    // RFC document information before pushing the tiddler onto the import list.
+    var tid = {
+      "title": RFCDataLocation + rfcnum,
+      "text": abstract,
+      "tags": RFCDataTag,
       "rfc-title": rfctitle,
       "rfc-num": rfcnum,
-      "rfc-errata-url": errurl,
-
-      "rfc-current-status": currstat,
-      "rfc-publication-status": pubstat,
-
-      "rfc-updates": updates,
-      "rfc-updated-by": updatedby,
-      "rfc-obsoletes": obsoletes,
-      "rfc-obsoleted-by": obsoletedby
     };
+
+    txfRfcList(rfcentry, "updates", tid, "rfc-updates");
+    txfRfcList(rfcentry, "updated-by", tid, "rfc-updated-by");
+    txfRfcList(rfcentry, "obsoletes", tid, "rfc-obsoletes");
+    txfRfcList(rfcentry, "obsoleted-by", tid, "rfc-obsoleted-by");
+
+    txfElement(rfcentry, "current-status", tid, "rfc-current-status");
+    txfElement(rfcentry, "publication-status", tid, "rfc-publication-status");
+    txfElement(rfcentry, "errata-url", tid, "rfc-errata-url");
+
+    // Finally push this RFC data tiddler into the import list.
     results.push(tid);
   });
 
