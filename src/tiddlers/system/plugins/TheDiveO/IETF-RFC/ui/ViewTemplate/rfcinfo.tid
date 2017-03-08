@@ -1,6 +1,6 @@
 created: 20170226165952150
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20170305220007678
+modified: 20170308105048680
 tags: $:/tags/ViewTemplate
 title: $:/plugins/TheDiveO/IETF-RFC/ui/ViewTemplate/rfcinfo
 type: text/vnd.tiddlywiki
@@ -31,6 +31,14 @@ type: text/vnd.tiddlywiki
 <tr><th>Current status</th><td>
 <$view field="rfc-current-status"/>
 <$macrocall $name="rfc-view-status-filter" currstat={{!!rfc-current-status}} />
+</td></tr>
+<tr><th>Publication date</th><td>
+<$macrocall
+	$name="rfc-date-formatted"
+    date={{!!rfc-date}}
+    shortformat="MMM YYYY"
+    longformat="DDth MMM YYYY"
+/>
 </td></tr>
 <$macrocall $name="rfc-view-table-row-rfcdoc-link" num={{!!rfc-num}} />
 <<rfc-view-table-row "Obsoletes&nbsp;<i class='fa fa-long-arrow-right'/>" "rfc-obsoletes">>

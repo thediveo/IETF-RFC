@@ -4,10 +4,26 @@ type: application/javascript
 title: $:/plugins/TheDiveO/IETF-RFC/tiddlerdeserializer/rfcxml.js
 tags:
 modifier: TheDiveO
-modified: 20170307185632585
+modified: 20170308095854263
 creator: TheDiveO
 module-type: tiddlerdeserializer
 \*/
+//
+// This is an import module ("tiddler deserializer") for importing the IETF's
+// RFC index, to be found at:
+//   https://www.rfc-editor.org/rfc-index.xml
+// Before you can import the RFC index into a TiddlyWiki using this import module,
+// you need to rename the downloaded file to have the extension of ".rfcindex".
+//
+// The schema of the IETF RFC index can be found here:
+//   https://www.rfc-editor.org/rfc-index.xsd
+//
+// Some notes on the RFC index schema:
+// - document *identifiers* take on the following forms:
+//   * RFC#### -- but will probably soon overflow to 5 digits, RFC####(#)
+//   * STD####
+//   * BCP####
+
 (function(){
 
 /*jslint node: true, browser: true */
@@ -115,11 +131,57 @@ function txfRfcList(entry, elementName, tid, fieldName) {
   }
 }
 
+//
+var monthsIndex = {
+  'January':   '01',
+  'February':  '02',
+  'March' :    '03',
+  'April':     '04',
+  'May':       '05',
+  'June':      '06',
+  'July':      '07',
+  'August':    '08',
+  'September': '09',
+  'October':   '10',
+  'November':  '11',
+  'December':  '12'
+}
+
+// Retrieve the publication date of an RFC document, and return it in
+// TW5-conformant form. This convenience function properly handles the case
+// where a document doesn't have a publication day, but only month and year.
+// This is because not all IETF RFC documents have a known day of
+// publication (especially the earlier ones).
+function getRfcDate(entry) {
+  var ymd = entry.getElementsByTagName("date");
+  if (ymd.length > 0) {
+  	var dd = getElementValue(ymd[0], "day", "00");
+    var mm = getElementValue(ymd[0], "month", "00");
+    if (mm !== "00") {
+      mm = monthsIndex[mm];
+    }
+    var yyyy = getElementValue(ymd[0], "year", "1970");
+    return yyyy + mm + dd;
+  } else {
+    return "19700101000000";
+  }
+}
+
 // The RFC Index importer itself, which is a TW5 tiddler deserializer that works
 // on an XML RFC index file.
 exports["application/x-rfc-index"] = function(text, fields) {
   var rfcidx = new DOMParser().parseFromString(text, "text/xml");
   var results = [];
+  var index = {};
+
+  function obsoleteRFCs(list) {
+    $tw.utils.each(list.split(" "), function(rfc) {
+      tid = index[rfc];
+      if (tid !== undefined) {
+        //
+      }
+    });
+  }
 
   // Iterate over all RFC entry elements in the RFC index.
   $tw.utils.each(rfcidx.getElementsByTagName("rfc-entry"), function(rfcentry) {
@@ -145,7 +207,9 @@ exports["application/x-rfc-index"] = function(text, fields) {
       "tags": RFCDataTag,
       "rfc-title": rfctitle,
       "rfc-num": rfcnum,
+      "rfc-date": getRfcDate(rfcentry)
     };
+    index[rfcnum] = tid;
 
     txfRfcList(rfcentry, "updates", tid, "rfc-updates");
     txfRfcList(rfcentry, "updated-by", tid, "rfc-updated-by");
