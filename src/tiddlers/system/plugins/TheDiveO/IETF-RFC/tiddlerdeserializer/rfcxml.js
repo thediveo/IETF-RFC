@@ -4,7 +4,7 @@ type: application/javascript
 title: $:/plugins/TheDiveO/IETF-RFC/tiddlerdeserializer/rfcxml.js
 tags:
 modifier: TheDiveO
-modified: 20170308095854263
+modified: 20170308110257258
 creator: TheDiveO
 module-type: tiddlerdeserializer
 \*/
@@ -131,7 +131,9 @@ function txfRfcList(entry, elementName, tid, fieldName) {
   }
 }
 
-//
+// Map RFC document publication date month names back to ISO date-compliant
+// month numbers as used in TW5 -- which are 1-based, by the way; and are
+// always double-digit also.
 var monthsIndex = {
   'January':   '01',
   'February':  '02',
@@ -152,6 +154,8 @@ var monthsIndex = {
 // where a document doesn't have a publication day, but only month and year.
 // This is because not all IETF RFC documents have a known day of
 // publication (especially the earlier ones).
+// - YYYYMM00 -- when the day isn't known.
+// - YYYYMMDD -- when the day is also known.
 function getRfcDate(entry) {
   var ymd = entry.getElementsByTagName("date");
   if (ymd.length > 0) {
@@ -215,6 +219,11 @@ exports["application/x-rfc-index"] = function(text, fields) {
     txfRfcList(rfcentry, "updated-by", tid, "rfc-updated-by");
     txfRfcList(rfcentry, "obsoletes", tid, "rfc-obsoletes");
     txfRfcList(rfcentry, "obsoleted-by", tid, "rfc-obsoleted-by");
+
+    // Convenience field
+    if ( $tw.utils.hop(tid, "rfc-obsoleted-by") ) {
+      tid["rfc-obsoleted"] = "yes";
+    }
 
     txfElement(rfcentry, "current-status", tid, "rfc-current-status");
     txfElement(rfcentry, "publication-status", tid, "rfc-publication-status");
