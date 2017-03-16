@@ -1,7 +1,7 @@
 created: 20170304082452865
-modified: 20170304084242885
+modified: 20170316105251597
 tags: $:/tags/Stylesheet
-title: $:/plugins/TheDiveO/IETF-RFC/styles-rfc-header
+title: $:/plugins/TheDiveO/IETF-RFC/styles/rfc-header
 type: text/css
 
 table.ietf-rfc-view-data-table th {
@@ -15,4 +15,8 @@ ul.ietf-rfc-view-data-table-rfclist {
 }
 
 .ietf-rfc-view-abstract {
+}
+
+.ietf-rfc-view-title-obsolete {
+	text-decoration: line-through;
 }

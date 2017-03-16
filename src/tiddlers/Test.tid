@@ -1,6 +1,6 @@
 created: 20170226173415181
 creator: TheDiveo
-modified: 20170226202447711
+modified: 20170316093422585
 modifier: TheDiveo
 tags: 
 title: Test
@@ -16,3 +16,6 @@ type: text/vnd.tiddlywiki
 * see also RFC 3318.
 * or shorter: see RFC*3318.
 * but don't see RFC&nbsp;3318, or rfc 3318. Or xxRFC 3318.
+
+!! Data Base: Obsoleted RFCs
+<<list-links filter:"[!field:rfc-obsoleted-by[]]">>

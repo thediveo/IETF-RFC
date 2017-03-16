@@ -1,8 +1,16 @@
 created: 20170226171839843
-modified: 20170305215120595
+modified: 20170308143917435
 tags: $:/tags/Stylesheet
 title: $:/plugins/TheDiveO/IETF-RFC/styles/rfc-view
 type: text/css
+
+.ietf-rfc-view-title {
+	font-weight: bold;
+}
+
+.ietf-rfc-view-title.ietf-rfc-view-obsolete {
+	text-decoration: line-through;
+}
 
 .ietf-rfc-view-abstract {
 	font-style: italic;

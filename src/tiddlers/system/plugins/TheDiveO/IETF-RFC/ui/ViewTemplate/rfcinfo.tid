@@ -1,6 +1,6 @@
 created: 20170226165952150
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20170308105048680
+modified: 20170316104256283
 tags: $:/tags/ViewTemplate
 title: $:/plugins/TheDiveO/IETF-RFC/ui/ViewTemplate/rfcinfo
 type: text/vnd.tiddlywiki
@@ -19,6 +19,10 @@ type: text/vnd.tiddlywiki
 >(originally published as: <$view field="rfc-publication-status"/>)</$list>
 \end
 
+\define rfc-view-title(obsolete)
+<span class="ietf-rfc-view-title $obsolete$"><$transclude field="rfc-title">...</$transclude></span>
+\end
+
 <$list
 	filter="[all[current]prefix[RFC ]]"
 ><$list
@@ -28,6 +32,11 @@ type: text/vnd.tiddlywiki
 ><table
 	class="ietf-rfc-view-data-table"
 >
+<tr><th>Title</th><td>
+<$condset name="rfc-obsoleted" check={{!!rfc-obsoleted}} list="yes" matchValue="ietf-rfc-view-title-obsolete">
+<$macrocall $name="rfc-view-title" obsolete=<<rfc-obsoleted>> />
+</$condset>
+</td></tr>
 <tr><th>Current status</th><td>
 <$view field="rfc-current-status"/>
 <$macrocall $name="rfc-view-status-filter" currstat={{!!rfc-current-status}} />
