@@ -1,18 +1,30 @@
 created: 20170226173119409
-modified: 20170317091609676
+modified: 20170317105636473
 tags: $:/tags/Macro
 title: $:/plugins/TheDiveO/IETF-RFC/macros/rfc-ref
 type: text/vnd.tiddlywiki
 
-\define rfc-tt(num) RFC&nbsp;$num$: <<rfc-title>>
+\define rfc-num-and-title(num)
+<!-- render "RFC" with number, and its title. -->
+RFC&nbsp;$num$: <<rfc-title>>
+\end
 
 \define rfc-link(num, classes)
+<!-- render a link to an RFC tiddler, with its number and title. -->
 <$link
 	to="RFC $num$"
     class="ietf-rfc-link ietf-rfc-link-rfc ietf-rfc-link-rfc-normal $classes$"
 >RFC&nbsp;$num$ <span
 	class="ietf-rfc-link-rfc-title"
 ><<ietf-rfc-lquo>><$transclude field="rfc-title">...</$transclude><<ietf-rfc-rquo>></span></$link>
+\end
+
+\define rfc-link-short(num, classes)
+<!-- render a short link to an RFC tioddler, with its number. -->
+<$link
+	to="RFC $num$"
+    class="ietf-rfc-link ietf-rfc-link-rfc ietf-rfc-link-rfc-short $classes$"
+>RFC&nbsp;$num$</$link>
 \end
 
 \define rfc(num)
@@ -24,7 +36,7 @@ type: text/vnd.tiddlywiki
     emptyValue="..."
 ><$set
 	name="tv-wikilink-tooltip"
-    value=<<rfc-tt num:$num$>>
+    value=<<rfc-num-and-title num:$num$>>
 ><$condset
 	name="rfc-obsoleted"
     check={{!!rfc-obsoleted}}
@@ -45,9 +57,14 @@ type: text/vnd.tiddlywiki
     emptyValue="..."
 ><$set
 	name="tv-wikilink-tooltip"
-    value=<<rfc-tt num:$num$>>
-><$link
-	to="RFC $num$"
-    class="ietf-rfc-link ietf-rfc-link-rfc ietf-rfc-link-rfc-short"
->RFC&nbsp;$num$</$link></$set></$set></$list>
+    value=<<rfc-num-and-title num:$num$>>
+><$condset
+	name="rfc-obsoleted"
+    check={{!!rfc-obsoleted}}
+    list="yes"
+    matchValue="ietf-rfc-link-rfc-obsolete"
+><$macrocall
+	$name="rfc-link-short"
+    num=$num$ classes=<<rfc-obsoleted>> 
+/></$condset></$set></$set></$list>
 \end

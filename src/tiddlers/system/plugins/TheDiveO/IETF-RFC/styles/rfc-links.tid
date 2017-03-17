@@ -1,24 +1,25 @@
 created: 20170226180754050
-modified: 20170317091711162
+modified: 20170317104815280
 tags: $:/tags/Stylesheet
 title: $:/plugins/TheDiveO/IETF-RFC/styles/rfc-links
 type: text/css
 
-/* Place a "comment" icon just before a reference to an RFC article. You need
- * to have the plugin TW5FontAwesome installed for this to correctly show. Why
- * a "comment" icon? Because these are (R)equests (F)or (C)omments.
+/* Place a "sticky note" icon just before a reference to an RFC article. You need
+ * to have the plugin TW5FontAwesome installed for this to correctly show.
  */
 .ietf-rfc-link-rfc:before {
 	font-family: "FontAwesome";
-    vertical-align: super;
     font-size: 70%;
     font-style: normal;
-    content: "\f0e5\202f";
+    vertical-align: 7%;
+    opacity: 0.5;
+    content: "\f24a\202f";
 }
 
 /* A link to an obsolete RFC document
  */
-a.ietf-rfc-link-rfc-obsolete {
+a.ietf-rfc-link-rfc-obsolete,
+a.ietf-rfc-link-rfc-obsolete:hover {
 	text-decoration: line-through;
 }
 
@@ -27,7 +28,7 @@ a.ietf-rfc-link-rfc-obsolete {
  */
 .ietf-rfc-link-rfc-title {
 	font-style: italic;
-    vertical-align: super;
+    vertical-align: 15%;
     font-size: 75%;
 }
 
