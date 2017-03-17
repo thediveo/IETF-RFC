@@ -1,6 +1,6 @@
 created: 20170226173415181
 creator: TheDiveo
-modified: 20170316093422585
+modified: 20170317084703381
 modifier: TheDiveo
 tags: 
 title: Test
@@ -11,6 +11,7 @@ type: text/vnd.tiddlywiki
 * short RFC reference: <<rfcs 3318>>.
 * missing RFC reference: <<rfc 7724>>.
 * invalid RFC reference: <<rfc 99999>>.
+* obsolete RFC reference: <<rfc 7630>>.
 
 !! Parser Rules
 * see also RFC 3318.

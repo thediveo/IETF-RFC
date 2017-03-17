@@ -1,9 +1,9 @@
 /*\
 created: 20170316101051162
+type: application/javascript
 title: $:/plugins/TheDiveO/IETF-RFC/widgets/condset.js
 tags:
-modified: 20170316104347065
-type: application/javascript
+modified: 20170317090104934
 module-type: widget
 \*/
 /*
