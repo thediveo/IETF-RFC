@@ -4,7 +4,7 @@ type: application/javascript
 title: $:/plugins/TheDiveO/IETF-RFC/tiddlerdeserializer/rfcxml.js
 tags:
 modifier: TheDiveO
-modified: 20170308110257258
+modified: 20170317113749808
 creator: TheDiveO
 module-type: tiddlerdeserializer
 \*/
@@ -220,14 +220,15 @@ exports["application/x-rfc-index"] = function(text, fields) {
     txfRfcList(rfcentry, "obsoletes", tid, "rfc-obsoletes");
     txfRfcList(rfcentry, "obsoleted-by", tid, "rfc-obsoleted-by");
 
-    // Convenience field
-    if ( $tw.utils.hop(tid, "rfc-obsoleted-by") ) {
-      tid["rfc-obsoleted"] = "yes";
-    }
-
     txfElement(rfcentry, "current-status", tid, "rfc-current-status");
     txfElement(rfcentry, "publication-status", tid, "rfc-publication-status");
     txfElement(rfcentry, "errata-url", tid, "rfc-errata-url");
+
+    // Convenience field to quickly detect obsolete or historic RFCs.
+    if ( $tw.utils.hop(tid, "rfc-obsoleted-by")
+       	|| (tid["rfc-current-status"] === "HISTORIC") ) {
+      tid["rfc-obsoleted"] = "yes";
+    }
 
     // Finally push this RFC data tiddler into the import list.
     results.push(tid);
