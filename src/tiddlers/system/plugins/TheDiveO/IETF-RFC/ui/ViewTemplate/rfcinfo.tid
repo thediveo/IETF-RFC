@@ -1,6 +1,6 @@
 created: 20170226165952150
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20170317110945233
+modified: 20170317111710124
 tags: $:/tags/ViewTemplate
 title: $:/plugins/TheDiveO/IETF-RFC/ui/ViewTemplate/rfcinfo
 type: text/vnd.tiddlywiki
@@ -50,10 +50,10 @@ type: text/vnd.tiddlywiki
 />
 </td></tr>
 <$macrocall $name="rfc-view-table-row-rfcdoc-link" num={{!!rfc-num}} />
-<<rfc-view-table-row "Obsoletes&nbsp;<i class='fa fa-long-arrow-right'/>" "rfc-obsoletes">>
-<<rfc-view-table-row "Updates&nbsp;<i class='fa fa-long-arrow-right'/>" "rfc-updates">>
-<<rfc-view-table-row "Obsoleted by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-obsoleted-by">>
-<<rfc-view-table-row "Updated by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-updated-by">>
+<<rfc-view-table-row "Obsoletes&nbsp;<i class='fa fa-long-arrow-right'/><i class='fa fa-times'/>" "rfc-obsoletes">>
+<<rfc-view-table-row "Updates&nbsp;<i class='fa fa-long-arrow-right'/><i class='fa fa-pencil'/>" "rfc-updates">>
+<<rfc-view-table-row "<i class='fa fa-times'/>&nbsp;Obsoleted by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-obsoleted-by">>
+<<rfc-view-table-row "<i class='fa fa-pencil'/>&nbsp;Updated by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-updated-by">>
 <$list filter="[all[current]!field:rfc-errata-url[]]">
 <tr><th>Errata</th><td><a
 	href={{!!rfc-errata-url}}
