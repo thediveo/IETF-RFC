@@ -1,6 +1,6 @@
 created: 20170226165952150
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20170316104256283
+modified: 20170317110945233
 tags: $:/tags/ViewTemplate
 title: $:/plugins/TheDiveO/IETF-RFC/ui/ViewTemplate/rfcinfo
 type: text/vnd.tiddlywiki
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define rfc-view-table-row-rfcdoc-link(num)
-<tr><th>IETF RFC document</th><td><a href="https://tools.ietf.org/html/$num$"><$transclude field="rfc-title"/></a></td></tr>
+<tr><th>IETF RFC document</th><td><a href="https://tools.ietf.org/html/$num$" class="tc-tiddlylink tc-tiddlylink-external" target="_blank"><$transclude field="rfc-title"/></a></td></tr>
 \end
 
 \define rfc-view-status-filter(currstat)
@@ -54,6 +54,13 @@ type: text/vnd.tiddlywiki
 <<rfc-view-table-row "Updates&nbsp;<i class='fa fa-long-arrow-right'/>" "rfc-updates">>
 <<rfc-view-table-row "Obsoleted by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-obsoleted-by">>
 <<rfc-view-table-row "Updated by&nbsp;<i class='fa fa-long-arrow-left'/>" "rfc-updated-by">>
+<$list filter="[all[current]!field:rfc-errata-url[]]">
+<tr><th>Errata</th><td><a
+	href={{!!rfc-errata-url}}
+    class="tc-tiddlylink tc-tiddlylink-external"
+    target="_blank"
+>Errata(s) available</a></td></tr>
+</$list>
 </table>
 <h3 class="ietf-rfc-view-abstract-header">Abstract</h3>
 <div
